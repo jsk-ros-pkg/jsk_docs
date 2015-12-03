@@ -1,9 +1,9 @@
 - git:
-    uri: https://github.com/euslisp/jskeus.git
-    local-name: jskeus
-- git:
     uri: https://github.com/euslisp/EusLisp.git
     local-name: jskeus/eus
+- git:
+    uri: https://github.com/euslisp/jskeus.git
+    local-name: jskeus
 - git:
     uri: https://github.com/jsk-ros-pkg/jsk_common.git
     local-name: jsk_common
