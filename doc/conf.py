@@ -87,7 +87,7 @@ with open("index.rst", "w") as f:
 for repo in repos:
     # setup repo
     local_name = repo['git']['local-name']
-    uri = repo['git']['uri']
+    uri = os.path.splitext(repo['git']['uri'])[0]
     subprocess.call(['git', 'clone', '--depth=1', uri, local_name])
     subprocess.call(['git', 'clean', '-xfd'], cwd=local_name)
     subprocess.call(['git', 'reset', '--hard'], cwd=local_name)
