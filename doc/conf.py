@@ -3,6 +3,7 @@
 import sys
 import os
 import glob
+import shutil
 import shlex
 import subprocess
 import yaml
@@ -88,27 +89,19 @@ for repo in repos:
                 symlink_file = os.path.join(symlink_dir, file)
                 target_file = os.path.join(root, file)
                 print "-",target_file, symlink_file, root
-                if root == local_name and os.path.exists(target_file) and not os.path.exists(symlink_file):
+                if os.path.exists(symlink_dir):
+                    print("Skipping %s, which is already existing"%(symlink_dir))
+                elif root == local_name and os.path.exists(target_file) and not os.path.exists(symlink_file):
                     print ("Creating symlink for %s"%symlink_file)
                     os.symlink(os.path.relpath(os.path.join(target_file),os.path.dirname(symlink_file)), symlink_file)
                     with open(index, "a") as f:
                         f.write("   %s\n"%("README.md"))
-                elif os.path.exists(symlink_dir):
-                    print("Skipping %s, which is already existing"%(symlink_dir))
                 else:
-                    # create symlink
-                    os.makedirs(symlink_dir)
-                    os.symlink(os.path.relpath(os.path.join(root, file),symlink_dir), symlink_file)
-                    print ("Creating symlink for %s"%symlink_file)
+                    # copy directory
+                    shutil.copytree(root, symlink_dir)
+                    print ("Copying directries %s"%symlink_file)
                     with open(index, "a") as f:
                         f.write("   %s\n"%(os.path.join(root[len(local_name)+1:],file)))
-    target_file = os.path.join(local_name, "README.md")
-    symlink_file = os.path.join(local_name, "doc", "README.md")
-    # if os.path.exists(target_file) and not os.path.exists(symlink_file):
-    #     print ("Creating symlink for %s"%symlink_file)
-    #     os.symlink(os.path.relpath(os.path.join(target_file),os.path.dirname(symlink_file)), symlink_file)
-    #     with open(index, "a") as f:
-    #         f.write("   %s\n"%("README.md"))
 
 ## add image tables @wkentaro
 this_dir = os.path.dirname(os.path.abspath(__file__))
