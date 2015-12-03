@@ -1,7 +1,4 @@
 - git:
-    uri: https://github.com/euslisp/EusLisp.git
-    local-name: jskeus/eus
-- git:
     uri: https://github.com/euslisp/jskeus.git
     local-name: jskeus
 - git:

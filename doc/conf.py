@@ -140,6 +140,7 @@ for repo in repos:
     # euslisp
     if local_name == "jskeus":
         doc_dir=os.path.join('jskeus', 'doc');
+        subprocess.call(['make', 'eus'], cwd='jskeus')
         subprocess.call(['make', 'html'], cwd=doc_dir)
         build_dir = os.path.join('_build', 'html', 'jskeus', 'doc', 'html')
         if not os.path.exists(build_dir):
