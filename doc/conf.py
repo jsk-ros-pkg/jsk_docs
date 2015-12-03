@@ -92,8 +92,9 @@ for repo in repos:
     subprocess.call(['git', 'clean', '-xfd'], cwd=local_name)
     subprocess.call(['git', 'reset', '--hard'], cwd=local_name)
 
-    with open("index.rst", "a") as f:
-        f.write("   %s/doc/index\n"%(local_name))
+    if "/" not in local_name:
+        with open("index.rst", "a") as f:
+            f.write("   %s/doc/index\n"%(local_name))
     # add index.rst if not exists
     index = os.path.join(local_name, "doc", "index.rst")
     if not os.path.exists(index):
@@ -136,6 +137,17 @@ for repo in repos:
             f.write("\n")
             f.write("`API Documents <../../hrpsys-base-api/html/>`_\n")
 
+    # euslisp
+    if local_name == "jskeus":
+        doc_dir=os.path.join('jskeus', 'doc');
+        subprocess.call(['make', 'html'], cwd=doc_dir)
+        build_dir = os.path.join('_build', 'html', 'jskeus', 'doc', 'html')
+        if not os.path.exists(build_dir):
+            os.makedirs(os.path.dirname(build_dir))
+            shutil.copytree(os.path.join('jskeus', 'doc', 'html'), build_dir)
+        with open(index, "a") as f:
+            f.write("\n")
+            f.write("`API Documents <html>`_\n")
 
 ## add image tables @wkentaro
 this_dir = os.path.dirname(os.path.abspath(__file__))
