@@ -46,7 +46,7 @@ Search docs!
 
   <script>
     (function() {{
-      var cx = '005725808957933406402:fzgbgtunw94';
+      var cx = '004597581434396922146:u8zamng695e';
       var gcse = document.createElement('script');
       gcse.type = 'text/javascript';
       gcse.async = true;
