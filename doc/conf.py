@@ -98,7 +98,8 @@ for repo in repos:
     index = os.path.join(local_name, "doc", "index.rst")
     if not os.path.exists(index):
         print("Add %s"%(index))
-        os.mkdir(os.path.dirname(index))
+        if not os.path.exists(os.path.dirname(index)):
+            os.mkdir(os.path.dirname(index))
         with open(index, "a") as f:
             f.write(index_text.format(local_name=local_name, uri=uri))
 
@@ -123,6 +124,18 @@ for repo in repos:
                     print ("Copying directries %s"%symlink_file)
                     with open(index, "a") as f:
                         f.write("   %s\n"%(os.path.join(root[len(local_name)+1:],file)))
+
+    # hrpsys
+    if local_name == "hrpsys-base":
+        build_dir = os.path.join('_build', 'html', 'hrpsys-base-api')
+        if not os.path.exists(build_dir):
+            os.mkdir(build_dir)
+        subprocess.call(['cmake', '../../../hrpsys-base/doc'], cwd=build_dir)
+        subprocess.call(['make'], cwd=build_dir)
+        with open(index, "a") as f:
+            f.write("\n")
+            f.write("`API Documents <../../hrpsys-base-api/html/>`_\n")
+
 
 ## add image tables @wkentaro
 this_dir = os.path.dirname(os.path.abspath(__file__))
