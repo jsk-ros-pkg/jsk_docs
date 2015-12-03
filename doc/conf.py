@@ -40,9 +40,30 @@ index_text="""
 
 {local_name} is common stacks used in JSK lab.
 
+Search docs!
+
+.. raw:: html
+
+  <script>
+    (function() {{
+      var cx = '005725808957933406402:fzgbgtunw94';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+          '//cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    }})();
+  </script>
+  <gcse:search></gcse:search>
+
+If you coult find information, ask in `github issue`_.
+
 The code is open source, and `available on github`_.
 
 .. _available on github: {uri}
+.. _github issue: {uri}/issues
 
 
 This repository contains following ros packages:
