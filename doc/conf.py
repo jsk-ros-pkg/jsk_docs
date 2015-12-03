@@ -46,7 +46,7 @@ Search docs!
 
   <script>
     (function() {{
-      var cx = '004597581434396922146:u8zamng695e';
+      var cx = '004456067337976813255:nmwsdm8ctew';
       var gcse = document.createElement('script');
       gcse.type = 'text/javascript';
       gcse.async = true;
@@ -192,7 +192,7 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-# html_static_path = ['_static']
+html_static_path = ['_static']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -415,3 +415,6 @@ epub_exclude_files = ['search.html']
 
 # If false, no index is generated.
 #epub_use_index = True
+
+def setup(app):
+    app.add_stylesheet('search-button.css')
