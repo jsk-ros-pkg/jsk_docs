@@ -1,0 +1,31 @@
+- git:
+    uri: https://github.com/jsk-ros-pkg/jsk_common.git
+    local-name: jsk_common
+- git:
+    uri: https://github.com/jsk-ros-pkg/jsk_roseus.git
+    local-name: jsk_roseus
+- git:
+    uri: https://github.com/jsk-ros-pkg/jsk_recognition.git
+    local-name: jsk_recognition
+- git:
+    uri: https://github.com/jsk-ros-pkg/jsk_visualization.git
+    local-name: jsk_visualization
+- git:
+    uri: https://github.com/jsk-ros-pkg/jsk_planning.git
+    local-name: jsk_planning
+- git:
+    uri: https://github.com/jsk-ros-pkg/jsk_control.git
+    local-name: jsk_control
+- git:
+    uri: https://github.com/jsk-ros-pkg/jsk_smart_apps.git
+    local-name: jsk_smart_apps
+- git:
+    uri: https://github.com/jsk-ros-pkg/jsk_travis.git
+    local-name: jsk_travis
+- git:
+     uri: https://github.com/jsk-ros-pkg/jsk_robot.git
+     local-name: jsk_robot
+- git:
+    uri: https://github.com/jsk-ros-pkg/jsk_demos.git
+    local-name: jsk_demos
+

@@ -2,8 +2,10 @@
 #
 import sys
 import os
+import glob
 import shlex
 import subprocess
+import yaml
 
 from recommonmark.parser import CommonMarkParser
 
@@ -29,6 +31,86 @@ language = 'en'
 
 exclude_patterns = ['_build', 'venv', 'README.md']
 
+
+index_text="""
+==========
+{local_name}
+==========
+
+{local_name} is common stacks used in JSK lab.
+
+The code is open source, and `available on github`_.
+
+.. _available on github: {uri}
+
+
+This repository contains following ros packages:
+
+
+.. toctree::
+   :maxdepth: 2
+
+"""
+
+## get repositories and auto gen readme doc
+try:
+    filename = 'doc.rosinstall'
+    stream = open(filename, 'r')
+    repos = yaml.load(stream)
+except:
+    print >>sys.stderr, "Unexpected error:", sys.exc_info()[0]
+    sys.exit(1)
+with open("index.rst", "w") as f:
+    f.write(index_text.format(local_name="jsk_docs", uri="https://github.com/jsk-ros-pkg/jsk_docs"))
+for repo in repos:
+    # setup repo
+    local_name = repo['git']['local-name']
+    uri = repo['git']['uri']
+    subprocess.call(['git', 'clone', '--depth=1', uri, local_name])
+    subprocess.call(['git', 'clean', '-xfd'], cwd=local_name)
+    subprocess.call(['git', 'reset', '--hard'], cwd=local_name)
+
+    with open("index.rst", "a") as f:
+        f.write("   %s/doc/index\n"%(local_name))
+    # add index.rst if not exists
+    index = os.path.join(local_name, "doc", "index.rst")
+    if not os.path.exists(index):
+        print("Add %s"%(index))
+        os.mkdir(os.path.dirname(index))
+        with open(index, "a") as f:
+            f.write(index_text.format(local_name=local_name, uri=uri))
+
+    # for each README.md
+    for root, dirs, files in os.walk(local_name):
+        for file in files:
+            if file.endswith("README.md") and not root.startswith(os.path.join(local_name, "doc")):
+                symlink_dir = os.path.join(local_name, "doc", root[len(local_name)+1:]) # repo/doc/pkg, not repo/doc/repo/pkg
+                symlink_file = os.path.join(symlink_dir, file)
+                target_file = os.path.join(root, file)
+                print "-",target_file, symlink_file, root
+                if root == local_name and os.path.exists(target_file) and not os.path.exists(symlink_file):
+                    print ("Creating symlink for %s"%symlink_file)
+                    os.symlink(os.path.relpath(os.path.join(target_file),os.path.dirname(symlink_file)), symlink_file)
+                    with open(index, "a") as f:
+                        f.write("   %s\n"%("README.md"))
+                elif os.path.exists(symlink_dir):
+                    print("Skipping %s, which is already existing"%(symlink_dir))
+                else:
+                    # create symlink
+                    os.makedirs(symlink_dir)
+                    os.symlink(os.path.relpath(os.path.join(root, file),symlink_dir), symlink_file)
+                    print ("Creating symlink for %s"%symlink_file)
+                    with open(index, "a") as f:
+                        f.write("   %s\n"%(os.path.join(root[len(local_name)+1:],file)))
+    target_file = os.path.join(local_name, "README.md")
+    symlink_file = os.path.join(local_name, "doc", "README.md")
+    # if os.path.exists(target_file) and not os.path.exists(symlink_file):
+    #     print ("Creating symlink for %s"%symlink_file)
+    #     os.symlink(os.path.relpath(os.path.join(target_file),os.path.dirname(symlink_file)), symlink_file)
+    #     with open(index, "a") as f:
+    #         f.write("   %s\n"%("README.md"))
+
+## add image tables @wkentaro
 this_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, this_dir)
 import add_img_tables_to_index
