@@ -2,21 +2,14 @@ jsk_docs [![Documentation Status](https://readthedocs.org/projects/jsk-docs/badg
 ========
 
 # how to add repository
+
+add repository to the `doc/doc.rosinstall` file, the format follows [rosinstall format](http://docs.ros.org/independent/api/rosinstall/html/rosinstall_file_format.html)
+
+# how to generate doc on local environment
 ```
 cd doc
-git submodule add http://github.com/jsk-ros-pkg/jsk_xxx jsk_xxx
-```
-and add that information to doc/index.rst
-
-# how to update repository
-```
-cd doc
-update_submodule.sh
-git commit -m "update submodules for repository `LC_TIME=C date`" -a
+source ./setup.sh
+make html
+make doc
 ```
 
-# how to update doc directory
-```
-cd doc/jsk_xxx
-../update_doc_link.sh
-```
