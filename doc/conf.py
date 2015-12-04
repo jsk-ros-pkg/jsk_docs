@@ -40,7 +40,12 @@ index_text="""
 
 {local_name} is common stacks used in JSK lab.
 
-Search docs!
+.. raw:: html
+
+   <h2>
+   Search docs!
+   </h2>
+
 
 .. raw:: html
 
@@ -58,7 +63,11 @@ Search docs!
   </script>
   <gcse:search></gcse:search>
 
-If you coult find information, ask in `github issue`_.
+.. raw:: html
+
+   <h2>
+   <a href="{uri}/issues">Ask question!</a>
+   </h2>
 
 The code is open source, and `available on github`_.
 
