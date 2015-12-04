@@ -141,11 +141,12 @@ for repo in repos:
         build_dir = os.path.join('_build', 'html', 'hrpsys-base-api')
         if not os.path.exists(build_dir):
             os.mkdir(build_dir)
-        subprocess.call(['cmake', '../../../hrpsys-base/doc'], cwd=build_dir)
-        subprocess.call(['make'], cwd=build_dir)
+        if not os.path.exists(build_dir):
+            os.makedirs(os.path.dirname(build_dir))
+            shutil.copytree('hrpsys', build_dir)
         with open(index, "a") as f:
             f.write("\n")
-            f.write("`API Documents <../../hrpsys-base-api/html/>`_\n")
+            f.write("`API Documents <../../hrpsys-base-api/html>`_\n")
 
     # euslisp
     if local_name == "jskeus":

@@ -35,6 +35,7 @@
 - git:
     uri: https://github.com/fkanehiro/hrpsys-base.git
     local-name: hrpsys-base
+    version: gh-pages
 - git:
     uri: https://github.com/start-jsk/rtmros_common.git
     local-name: rtmros_common
