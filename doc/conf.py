@@ -88,7 +88,8 @@ for repo in repos:
     # setup repo
     local_name = repo['git']['local-name']
     uri = os.path.splitext(repo['git']['uri'])[0]
-    subprocess.call(['git', 'clone', '--depth=1', uri, local_name])
+    version = repo['git']['version'] if repo['git'].has_key('version') else 'master'
+    subprocess.call(['git', 'clone', '--depth=1', uri, local_name, '-b', version])
     subprocess.call(['git', 'clean', '-xfd'], cwd=local_name)
     subprocess.call(['git', 'reset', '--hard'], cwd=local_name)
 
@@ -140,12 +141,10 @@ for repo in repos:
     # euslisp
     if local_name == "jskeus":
         doc_dir=os.path.join('jskeus', 'doc');
-        subprocess.call(['make'], cwd='jskeus')
-        subprocess.call(['make', 'html'], cwd=doc_dir)
         build_dir = os.path.join('_build', 'html', 'jskeus', 'doc', 'html')
         if not os.path.exists(build_dir):
             os.makedirs(os.path.dirname(build_dir))
-            shutil.copytree(os.path.join('jskeus', 'doc', 'html'), build_dir)
+            shutil.copytree('jskeus', build_dir)
         with open(index, "a") as f:
             f.write("\n")
             f.write("`API Documents <html>`_\n")

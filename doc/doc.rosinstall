@@ -1,6 +1,7 @@
 - git:
     uri: https://github.com/euslisp/jskeus.git
     local-name: jskeus
+    version: gh-pages
 - git:
     uri: https://github.com/jsk-ros-pkg/jsk_common.git
     local-name: jsk_common
