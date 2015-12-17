@@ -165,7 +165,15 @@ this_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, this_dir)
 import add_img_tables_to_index
 if not subprocess.check_output(['git', 'diff']):
-    add_img_tables_to_index.main(exclude_patterns)
+    cwd = os.path.abspath(os.getcwd())
+    for doc in os.listdir(this_dir):
+        doc = os.path.abspath(doc)
+        doc = os.path.join(doc, 'doc')
+        if not os.path.exists(doc):
+            continue
+        os.chdir(doc)
+        add_img_tables_to_index.main(exclude_patterns)
+    os.chdir(cwd)
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
