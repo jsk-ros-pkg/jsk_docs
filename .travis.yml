@@ -1,0 +1,15 @@
+sudo: false
+
+language: python
+
+script:
+  - pip install virtualenv
+  - cd doc
+  - source setup.sh
+  - make html
+
+notifications:
+  email:
+    on_success: always
+    on_failure: always
+  slack: jsk-robotics:Av7tc8wj3IWkLYvlTzHE7x2g
