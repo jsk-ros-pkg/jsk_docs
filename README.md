@@ -12,5 +12,5 @@ add repository to the `doc/doc.rosinstall` file, the format follows [rosinstall 
 cd doc
 source ./setup.sh
 make html
-make doc
+make auto  # and go to http://127.0.0.1:8888
 ```
