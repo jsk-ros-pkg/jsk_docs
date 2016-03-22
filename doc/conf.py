@@ -160,17 +160,19 @@ for repo in repos:
             f.write("\n")
             f.write("`API Documents <html>`_\n")
 
-## add image tables @wkentaro
+# Add image tables in index page for nodes
 this_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, this_dir)
 import add_img_tables_to_index
-if not subprocess.check_output(['git', 'diff']):
+if subprocess.check_output(['git', 'diff']):
+    print('skipping adding image tables because there is changes in VCS')
+else:
     cwd = os.path.abspath(os.getcwd())
-    for doc in os.listdir(this_dir):
-        doc = os.path.abspath(doc)
-        doc = os.path.join(doc, 'doc')
+    for repo in os.listdir(this_dir):
+        doc = os.path.join(cwd, repo, 'doc')
         if not os.path.exists(doc):
             continue
+        print("adding image table for '{doc}'".format(doc=doc))
         os.chdir(doc)
         add_img_tables_to_index.main(exclude_patterns)
     os.chdir(cwd)
