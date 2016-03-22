@@ -74,6 +74,7 @@ The code is open source, and `available on github`_.
 .. _available on github: {uri}
 .. _github issue: {uri}/issues
 
+:doc:`inverse_lookup` should be useful for you
 
 This repository contains following ros packages:
 
