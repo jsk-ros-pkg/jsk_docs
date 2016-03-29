@@ -11,6 +11,8 @@ import yaml
 from recommonmark.parser import CommonMarkParser
 
 
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
 extensions = [
     'sphinx.ext.mathjax',
 ]
@@ -165,7 +167,7 @@ for repo in repos:
 this_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, this_dir)
 import add_img_tables_to_index
-if subprocess.check_output(['git', 'diff']):
+if (not on_rtd) and subprocess.check_output(['git', 'diff']):
     print('skipping adding image tables because there is changes in VCS')
 else:
     cwd = os.path.abspath(os.getcwd())
