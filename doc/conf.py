@@ -102,9 +102,12 @@ for repo in repos:
     uri = os.path.splitext(repo['git']['uri'])[0]
     version = repo['git']['version'] if repo['git'].has_key('version') else 'master'
     print("wrokin on name:{} uri:{} branch:{}".format(local_name, uri, version))
-    subprocess.call(['git', 'clone', '--depth=1', uri, local_name, '-b', version])
+    if os.path.exists(local_name):
+        subprocess.call(['git', 'fetch', '--all'], cwd=local_name)
+    else:
+        subprocess.call(['git', 'clone', '--depth=1', uri, local_name, '-b', version])
     subprocess.call(['git', 'clean', '-xfd'], cwd=local_name)
-    subprocess.call(['git', 'reset', '--hard'], cwd=local_name)
+    subprocess.call(['git', 'reset', '--hard', 'origin/%s' % version], cwd=local_name)
 
     if "/" not in local_name:
         with open("index.rst", "a") as f:
