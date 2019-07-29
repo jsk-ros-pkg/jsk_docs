@@ -8,7 +8,7 @@ Document is available on [readthedocs.org](http://jsk-docs.readthedocs.org/en/la
 
 ## How to add repository?
 
-Add repository to the `doc/doc.rosinstall` file, the format follows [rosinstall format](http://docs.ros.org/independent/api/rosinstall/html/rosinstall_file_format.html)
+Add repository to the `subproject` of the `jsk_docs`. See https://readthedocs.org/dashboard/jsk-docs/subprojects/ for mor detail.
 
 
 ## How to generate doc on local environment?
@@ -18,13 +18,4 @@ cd doc
 source ./setup.sh
 make html
 make auto  # and go to http://127.0.0.1:8888
-```
-
-## How to trigger the build?
-
-See https://readthedocs.org/dashboard/jsk-docs/integrations/9094/ to get the `TOKEN`.
-It is added to the cron job at [Jenkins](http://jenkins.jsk.imi.i.u-tokyo.ac.jp) with root user.
-
-```bash
-curl -X POST -d "branches=master" -d "token=${TOKEN}" https://readthedocs.org/api/v2/webhook/jsk-docs/9094/
 ```
