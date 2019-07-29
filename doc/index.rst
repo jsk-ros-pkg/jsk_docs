@@ -43,25 +43,13 @@ The code is open source, and `available on github`_.
 
 This repository contains following ros packages:
 
+.. include:: _sidebar.rst.inc
 
-.. toctree::
-   :maxdepth: 2
+Indices and tables
+==================
 
-   jskeus/doc/index
-   jsk_common/doc/index
-   jsk_roseus/doc/index
-   jsk_recognition/doc/index
-   jsk_visualization/doc/index
-   jsk_planning/doc/index
-   jsk_control/doc/index
-   jsk_smart_apps/doc/index
-   jsk_travis/doc/index
-   jsk_robot/doc/index
-   jsk_demos/doc/index
-   hrpsys-base/doc/index
-   rtmros_common/doc/index
-   rtmros_tutorials/doc/index
-   rtmros_choreonoid/doc/index
-   rtmros_gazebo/doc/index
-   rtmros_hironx/doc/index
-   jsk_apc/doc/index
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
+
