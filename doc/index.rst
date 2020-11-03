@@ -50,8 +50,10 @@ This repository contains following ros packages:
    jskeus/doc/index
    jsk_common/doc/index
    jsk_roseus/doc/index
+   jsk_pr2eus/doc/index
    jsk_recognition/doc/index
    jsk_visualization/doc/index
+   jsk_model_tools/doc/index
    jsk_planning/doc/index
    jsk_control/doc/index
    jsk_smart_apps/doc/index
